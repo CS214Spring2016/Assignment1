@@ -32,6 +32,18 @@ typedef int (*CompareFuncT)( void *, void * );
 typedef void (*DestructFuncT)( void * );
 
 
+//going to use a linked list i think
+struct node_List
+{
+	void* data;
+	int index;
+	struct node *next;
+};
+typedef struct node_List node;
+
+node *create(void *data, node* next);
+
+
 
 //-=-=-=-You must implement all the functions and definitions below-=-=-=-
 
@@ -43,6 +55,9 @@ typedef void (*DestructFuncT)( void * );
  */
 struct SortedList
 {
+	DestructFuncT destroyL;
+	CompareFuncT compareL;
+
 };
 typedef struct SortedList* SortedListPtr;
 
