@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
 
 //for all comparators:
@@ -45,9 +44,49 @@ int compareString(void *v1, void *v2)
 	return strcmp(n1,n2);
 }
 
+void destroyFunction(void *v)
+{
+	free(v);
+}
+
 
 int main(int argc, char **argv)
 {
-	printf("test\n");
+	SortedListPtr list = SLCreate(compareInteger, destroyFunction);
+	SortedListIteratorPtr testPtr;
+
+	int a = 1;
+	int b = 2;
+	int c = 3;
+	int d = 9;
+
+	SLInsert(list, (void*)&a);
+	SLInsert(list, (void*)&b);
+	SLInsert(list, (void*)&c);
+	SLInsert(list, (void*)&d);
+
+	testPtr = SLCreateIterator(list);
+	while(testPtr->current != NULL)
+	{
+		int* x = (int*)(testPtr->current->data);
+		if(x == NULL)
+		{
+			printf("X IS NULL\n");
+			break;
+		}
+		printf("%d", *x);
+		SLNextItem(testPtr);
+	}
+
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
