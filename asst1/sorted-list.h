@@ -32,18 +32,17 @@ typedef int (*CompareFuncT)( void *, void * );
 typedef void (*DestructFuncT)( void * );
 
 
-//list item type, of which sortedlist will be composed
-//contains data, an index, and a pointer
-//this is a linked list node
-struct listItem_
+//going to use a linked list i think
+struct node_List
 {
 	void* data;
-	struct listItem_* next;
+	int index;
+	struct node *next;
 };
-typedef struct listItem_ listItem;
+typedef struct node_List node;
 
-listItem* makeItem(void* data, listItem* next);
-void freeItem(listItem* item);
+node *create(void *data, node* next);
+void destroyNode(node* node);
 
 
 
@@ -55,12 +54,10 @@ void freeItem(listItem* item);
 /*
  * Sorted list type that will hold all the data to be sorted.
  */
- //the head will function as a pointer to a linked list which will actually be the item
 struct SortedList
 {
-	struct listItem_* head;
-	DestructFuncT destroyF;
-	CompareFuncT compareF;
+	DestructFuncT destroyL;
+	CompareFuncT compareL;
 
 };
 typedef struct SortedList* SortedListPtr;
@@ -130,7 +127,6 @@ int SLRemove(SortedListPtr list, void *newObj);
  */
 struct SortedListIterator
 {
-	listItem* current;
 };
 typedef struct SortedListIterator* SortedListIteratorPtr;
 
