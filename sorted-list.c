@@ -13,6 +13,7 @@ listItem* makeItem(void* data, listItem* next)
 	{
 		item->data = data;
 		item->next = next;
+		item->viewers=0;
 		return item;
 	}
 	else
@@ -145,7 +146,9 @@ void *SLNextItem(SortedListIteratorPtr iter)
 	listItem* temp = iter->current;
 	if(temp == NULL)
 		return NULL;
+	--iter->current->viewers;
 	iter->current=iter->current->next;
+	++iter->current->viewers;
 	return temp->data;
 }
 void * SLGetItem( SortedListIteratorPtr iter ){

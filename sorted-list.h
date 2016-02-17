@@ -40,6 +40,7 @@ struct listItem_
 {
 	void* data;
 	listItem* next;
+	int viewers;
 };
 
 
