@@ -122,9 +122,10 @@ int SLInsert(SortedListPtr list, void *newObj)
 		else{
 			//TODO test this
 			printf("put at beginning\n");
-			swap = iPtr->current;
-			iPtr->current= temp;
-			temp->next = swap;
+			swap = list->head;
+			list->head = temp;
+			iPtr->current =  list->head;
+			iPtr->current->next = swap;
 
 			return 1;
 

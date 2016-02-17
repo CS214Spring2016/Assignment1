@@ -113,6 +113,7 @@ int main(int argc, char **argv)
 	int c = 4;
 	int e = 5;
 	int d = 3;
+	int f = 0;
 
 
 	printf("%d %d\n",a,SLInsert(list, (void*)&a));
@@ -120,6 +121,7 @@ int main(int argc, char **argv)
 	printf("%d %d\n",c,SLInsert(list, (void*)&c));
 	printf("%d %d\n",e,SLInsert(list, (void*)&e));
 	printf("%d %d\n",d,SLInsert(list, (void*)&d));
+	printf("%d %d\n",f,SLInsert(list, (void*)&f));
 
 	testPtr = SLCreateIterator(list);
 
