@@ -120,7 +120,6 @@ int SLInsert(SortedListPtr list, void *newObj)
 			return 1;
 		}
 		else{
-			//TODO test this
 			printf("put at beginning\n");
 			swap = list->head;
 			list->head = temp;
@@ -148,6 +147,13 @@ void *SLNextItem(SortedListIteratorPtr iter)
 		return NULL;
 	iter->current=iter->current->next;
 	return temp->data;
+}
+void * SLGetItem( SortedListIteratorPtr iter ){
+	listItem* temp = iter->current;
+	if(temp == NULL)
+		return NULL;
+	return temp->data;
+
 }
 
 
