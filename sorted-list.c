@@ -103,10 +103,10 @@ int SLInsert(SortedListPtr list, void *newObj)
 			}
 			else if(compcurr == -1 && compnext == 1){//found the right place
 				printf("Put in middle\n");
-				swap = (listItem*)(iPtr->current->next);//save the next one
+				swap = iPtr->current->next;//save the next one
 				iPtr->current->next = temp;//put it in the right place
 				iPtr->current = iPtr->current->next;//iterate
-				iPtr->current->next = (listItem*)swap; //place the saved one
+				iPtr->current->next = swap; //place the saved one
 				return 1;
 			}
 			else
@@ -122,7 +122,7 @@ int SLInsert(SortedListPtr list, void *newObj)
 		else{
 			//TODO test this
 			printf("put at beginning\n");
-			swap = (iPtr->current);
+			swap = iPtr->current;
 			iPtr->current= temp;
 			temp->next = swap;
 
