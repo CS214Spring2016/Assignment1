@@ -83,8 +83,15 @@ int SLInsert(SortedListPtr list, void *newObj)
 	{
 		list->head = temp;
 	}
+	else{//TODO add into the right place
+		//put it at the end for now
+		printf("something is in the list, ill just throw the new thing on the end for now\n");
+		while(iPtr->current->next != NULL){
+			iPtr->current = iPtr->current->next;
+		}
+		iPtr->current->next=temp;
 
-
+	}
 
 	return 0;
 }
@@ -96,7 +103,7 @@ int SLRemove(SortedListPtr list, void *newObj)
 
 void *SLNextItem(SortedListIteratorPtr iter)
 {
-	return 0;
+	return iter->current->next;
 }
 
 
