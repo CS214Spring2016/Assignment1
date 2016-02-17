@@ -31,6 +31,9 @@
 # Debug files
 *.dSYM/
 
+#Eclipse stuff
 .cproject
-
 .project
+
+#Compiled Executable
+sl

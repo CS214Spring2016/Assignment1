@@ -107,12 +107,12 @@ int main(int argc, char **argv)
 {
 	SortedListPtr list = SLCreate(compareInteger, destroyFunction);
 	SortedListIteratorPtr testPtr;
-	printf("here3\n");
+
 	int a = 1;
 	int b = 2;
 	int c = 3;
 	int d = 9;
-	printf("here2\n");
+
 	SLInsert(list, (void*)&a);
 	SLInsert(list, (void*)&b);
 	SLInsert(list, (void*)&c);
