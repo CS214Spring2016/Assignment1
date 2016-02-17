@@ -4,6 +4,54 @@
 #include <string.h>
 
 
+/* lets test for structs too
+*  This is a name tag, it holds a Name and userID
+*/
+typedef struct NameTag_{
+	char *name;
+	int id;
+}NameTag;
+int compareInteger(void *v1, void *v2);
+
+NameTag *createNT(char * name, int idnumber){
+
+	//error checking
+		if(name == 0 | strlen(name) <= 0) return 0;
+
+		//allocate memory
+
+		NameTag *nt = (NameTag*)malloc(sizeof(NameTag));
+		if(nt == NULL)
+		{
+			fprintf(stderr, "Out of memory\n");
+			exit(EXIT_FAILURE);
+		}
+		nt->name=strdup(name);
+		if(nt->name==NULL){//this is a secret malloc, free later
+			fprintf(stderr, "Out of memory\n");
+			exit(EXIT_FAILURE);
+		}
+		nt->id=idnumber;
+		return nt;
+}
+
+void destroyNT(NameTag * nametag){
+	free(nametag->name);
+	free(nametag);
+}
+int compareNameTag(void *v1, void *v2){
+	NameTag n1 = *(NameTag*)v1;
+	NameTag n2 = *(NameTag*)v2;
+	int compareNum = strcmp(n1->name,n2->name);
+	if(compareNum==0)
+		return compareInteger(n1->id,n2->id);
+	else if(compareNum<0)
+		return -1;
+	else if(compareNum>0)
+		return 1;
+	else return 0;
+
+}
 //for all comparators:
 //-1 if first is smaller than second, 0 if equal, 1 if first is bigger
 int compareInteger(void *v1, void *v2)
@@ -40,8 +88,13 @@ int compareString(void *v1, void *v2)
 {
 	char *n1 = v1;
 	char *n2 = v2;
-
-	return strcmp(n1,n2);
+	int compareNum = strcmp(n1,n2);
+	if(compareNum==0)
+		return 0;
+	else if(compareNum<0)
+		return -1;
+	else
+		return 1;
 }
 
 void destroyFunction(void *v)
