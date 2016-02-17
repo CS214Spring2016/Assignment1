@@ -40,11 +40,11 @@ void destroyNT(NameTag * nametag){
 	free(nametag);
 }
 int compareNameTag(void *v1, void *v2){
-	NameTag n1 = *(NameTag*)v1;
-	NameTag n2 = *(NameTag*)v2;
+	NameTag *n1 = (NameTag*)v1;
+	NameTag *n2 = (NameTag*)v2;
 	int compareNum = strcmp(n1->name,n2->name);
 	if(compareNum==0)
-		return compareInteger(n1->id,n2->id);
+		return compareInteger((void*)&n1->id,(void*)&n2->id);
 	else if(compareNum<0)
 		return -1;
 	else if(compareNum>0)
