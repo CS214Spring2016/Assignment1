@@ -142,7 +142,11 @@ int SLRemove(SortedListPtr list, void *newObj)
 
 void *SLNextItem(SortedListIteratorPtr iter)
 {
-	return iter->current->next;
+	listItem* temp = iter->current;
+	if(temp == NULL)
+		return NULL;
+	iter->current=iter->current->next;
+	return temp->data;
 }
 
 

@@ -122,19 +122,13 @@ int main(int argc, char **argv)
 	printf("%d %d\n",d,SLInsert(list, (void*)&d));
 
 	testPtr = SLCreateIterator(list);
-	printf("iterator created\n");
-	while(testPtr->current != NULL)
-	{
-		printf("in the loop\n");
-		int* x = (int*)(testPtr->current->data);
-		if(x == NULL)
-		{
-			printf("X IS NULL\n");
-			break;
-		}
-		printf("Current list item: %d\n", *x);
-		testPtr->current = testPtr->current->next;//iterate
+
+	int* currlist = (int *)SLNextItem(testPtr);
+	while( currlist != NULL){
+		printf("Current list item: %d\n",*currlist);
+		currlist = (int*)SLNextItem(testPtr);
 	}
+
 
 	//test NameTag Struct
 
