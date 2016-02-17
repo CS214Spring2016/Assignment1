@@ -35,12 +35,13 @@ typedef void (*DestructFuncT)( void * );
 //list item type, of which sortedlist will be composed
 //contains data, an index, and a pointer
 //this is a linked list node
+typedef struct listItem_ listItem;
 struct listItem_
 {
 	void* data;
-	struct listItem_* next;
+	listItem* next;
 };
-typedef struct listItem_ listItem;
+
 
 listItem* makeItem(void* data, listItem* next);
 void freeItem(listItem* item);

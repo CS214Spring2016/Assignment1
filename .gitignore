@@ -36,4 +36,5 @@
 .project
 
 #Compiled Executable
-sl
+
+./sl

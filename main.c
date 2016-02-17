@@ -110,18 +110,22 @@ int main(int argc, char **argv)
 
 	int a = 1;
 	int b = 2;
-	int c = 3;
-	int d = 9;
+	int c = 4;
+	int e = 5;
+	int d = 3;
 
-	SLInsert(list, (void*)&a);
-	SLInsert(list, (void*)&b);
-	SLInsert(list, (void*)&c);
-	SLInsert(list, (void*)&d);
+
+	printf("%d %d\n",a,SLInsert(list, (void*)&a));
+	printf("%d %d\n",b,SLInsert(list, (void*)&b));
+	printf("%d %d\n",c,SLInsert(list, (void*)&c));
+	printf("%d %d\n",e,SLInsert(list, (void*)&e));
+	printf("%d %d\n",d,SLInsert(list, (void*)&d));
 
 	testPtr = SLCreateIterator(list);
-
+	printf("iterator created\n");
 	while(testPtr->current != NULL)
 	{
+		printf("in the loop\n");
 		int* x = (int*)(testPtr->current->data);
 		if(x == NULL)
 		{

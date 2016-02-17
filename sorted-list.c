@@ -75,25 +75,64 @@ int SLInsert(SortedListPtr list, void *newObj)
 	}
 
 	listItem *temp;
+	listItem *swap;
 	temp = (listItem*)malloc(sizeof(listItem));
+
+	if(temp == NULL){
+		fprintf(stderr, "Out of memory\n");
+		exit(EXIT_FAILURE);
+	}
 	temp->data = newObj;
 	temp->next = NULL;
 	
 	if(list->head == NULL)
 	{
+		printf("first item\n");
 		list->head = temp;
+
 	}
-	else{//TODO add into the right place
-		//put it at the end for now
-		printf("something is in the list, ill just throw the new thing on the end for now\n");
+	else{
+
 		while(iPtr->current->next != NULL){
-			iPtr->current = iPtr->current->next;
-		}
-		iPtr->current->next=temp;
+			int compcurr = list->compareF(iPtr->current->data, temp->data);
+			int compnext = list->compareF(iPtr->current->next->data, temp->data);
+			if(compcurr==0){
+				printf("already here\n");
 
+				return 0;
+			}
+			else if(compcurr == -1 && compnext == 1){//found the right place
+				printf("Put in middle\n");
+				swap = (listItem*)(iPtr->current->next);//save the next one
+				iPtr->current->next = temp;//put it in the right place
+				iPtr->current = iPtr->current->next;//iterate
+				iPtr->current->next = (listItem*)swap; //place the saved one
+				return 1;
+			}
+			else
+				iPtr->current = iPtr->current->next;
+		}
+		int compcurr = list->compareF(iPtr->current->data, temp->data);
+		if(compcurr == -1){
+			printf("put at end\n");
+			iPtr->current->next = temp;//put it in the right place
+			iPtr->current = iPtr->current->next;//iterate
+			return 1;
+		}
+		else{
+			//TODO test this
+			printf("put at beginning\n");
+			swap = (iPtr->current);
+			iPtr->current= temp;
+			temp->next = swap;
+
+			return 1;
+
+		}
 	}
 
-	return 0;
+
+	return 1;
 }
 
 int SLRemove(SortedListPtr list, void *newObj)
