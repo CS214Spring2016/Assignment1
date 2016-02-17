@@ -35,7 +35,8 @@ NameTag *createNT(char * name, int idnumber){
 		return nt;
 }
 
-void destroyNT(NameTag * nametag){
+void destroyNT(void * v1){
+	NameTag *nametag = (NameTag*)v1;
 	free(nametag->name);
 	free(nametag);
 }
@@ -133,6 +134,22 @@ int main(int argc, char **argv)
 
 
 	//test NameTag Struct
+
+	char* nombre = "Michael";
+	NameTag *michael = createNT(nombre, 19);
+	NameTag *michaelclone = createNT(nombre, 94);
+	SortedListPtr namelist = SLCreate(compareNameTag, destroyNT);
+	SortedListIteratorPtr nameIT;
+
+	printf("%s %d\n",michael->name,SLInsert(namelist, (void*)michael));
+	printf("%s %d\n",michaelclone->name,SLInsert(namelist, (void*)michaelclone));
+
+	nameIT = SLCreateIterator(namelist);
+	NameTag* currname = (NameTag *)SLNextItem(nameIT);
+	while( currname != NULL){
+			printf("Current list item: %s %d\n",currname->name, currname->id);
+			currname = (NameTag*)SLNextItem(nameIT);
+	}
 
 	return 0;
 }
