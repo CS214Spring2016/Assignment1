@@ -136,8 +136,8 @@ int main(int argc, char **argv)
 	//test NameTag Struct
 
 	char* nombre = "Michael";
-	NameTag *michael = createNT(nombre, 19);
-	NameTag *michaelclone = createNT(nombre, 94);
+	NameTag *michael = createNT(nombre, 94);
+	NameTag *michaelclone = createNT(nombre, 19);
 	SortedListPtr namelist = SLCreate(compareNameTag, destroyNT);
 	SortedListIteratorPtr nameIT;
 
