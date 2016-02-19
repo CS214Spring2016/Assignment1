@@ -95,8 +95,8 @@ int SLInsert(SortedListPtr list, void *newObj)
 	else{
 
 		while(iPtr->current->next != NULL){
-			int compcurr = list->compareF(iPtr->current->data, temp->data);
-			int compnext = list->compareF(iPtr->current->next->data, temp->data);
+			int compcurr = list->compareF(temp->data,iPtr->current->data);
+			int compnext = list->compareF(temp->data, iPtr->current->next->data );
 			if(compcurr==0){
 				printf("already here\n");
 
@@ -113,7 +113,7 @@ int SLInsert(SortedListPtr list, void *newObj)
 			else
 				iPtr->current = iPtr->current->next;
 		}
-		int compcurr = list->compareF(iPtr->current->data, temp->data);
+		int compcurr = list->compareF(temp->data, iPtr->current->data);
 		if(compcurr == -1){
 			printf("put at end\n");
 			iPtr->current->next = temp;//put it in the right place
