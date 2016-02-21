@@ -138,6 +138,21 @@ int SLInsert(SortedListPtr list, void *newObj)
 
 int SLRemove(SortedListPtr list, void *newObj)
 {
+
+	SortedListIteratorPtr ptr = new SortedListIteratorPtr(list);
+
+	if(ptr == NULL)
+	{
+		return 0;
+	}
+
+	listItem* next;
+	listItem* previous = ptr->current;
+
+
+
+
+
 	return 0;
 }
 
@@ -163,6 +178,17 @@ void * SLGetItem( SortedListIteratorPtr iter ){
 
 void SLDestroyIterator(SortedListIteratorPtr iter) 
 {
-	//return 0;
+	if(iter->current != NULL)
+	{
+		if(iter->current->viewers <= 1)
+		{
+			freeItem(iter->current);
+		}
+		else
+		{
+			iter->current->viewers--;
+		}
+	}
+	free(iter);
 }
 
