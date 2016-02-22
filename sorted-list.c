@@ -139,21 +139,51 @@ int SLInsert(SortedListPtr list, void *newObj)
 int SLRemove(SortedListPtr list, void *newObj)
 {
 
-	SortedListIteratorPtr ptr = new SortedListIteratorPtr(list);
-
+	SortedListIteratorPtr ptr = SLCreateIterator(list);
 	if(ptr == NULL)
 	{
 		return 0;
 	}
 
-	listItem* next;
+	void* element;
 	listItem* previous = ptr->current;
 
+	//compare object passed with items in list
+	int comp = (*list->compareF)(newObj,list->head->data);
 
+	//if the value is at the front
+	if(comp == 0)
+	{
+		list->head = list->head->next;
+		SLDestroyIterator(ptr);
+	}
 
+	//get next item pointed to by iterator
+	element = SLNextItem(ptr);
 
+	//loop through linked list, checking if equal
+	while(ptr->current != NULL)
+	{
+		int comp2 = (*list->compareF)(newObj,element);
+		if(comp2 == 0)
+		{
+			previous->next = ptr->current->next;
+			SLDestroyIterator(ptr);
+			return 1;
+			
+		}
+
+		previous = ptr->current;
+		element = SLNextItem(ptr);
+
+	}
 
 	return 0;
+
+
+
+
+
 }
 
 void *SLNextItem(SortedListIteratorPtr iter)
