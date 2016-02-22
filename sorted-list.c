@@ -210,15 +210,15 @@ void *SLNextItem(SortedListIteratorPtr iter)
 		cur->viewers--;
 	}
 
-	iter->current = temp;
-	if(temp == NULL)
+	iter->current = next;
+	if(next == NULL)
 	{
 		return NULL;
 	}
 	else
 	{
-		temp->viewers++;
-		return temp->data;
+		iter->current->viewers++;
+		return iter->current->data;
 	}
 }
 void * SLGetItem( SortedListIteratorPtr iter ){
