@@ -145,39 +145,40 @@ int SLRemove(SortedListPtr list, void *newObj)
 		return 0;
 	}
 
-	void* element;
-	listItem* previous = ptr->current;
+	listItem* cur;
+	listItem* prev;
 
-	//compare object passed with items in list
-	int comp = (*list->compareF)(newObj,list->head->data);
 
-	//if the value is at the front
-	if(comp == 0)
+	//checking at head
+	int compcur = list->compareF(newObj,ptr->current->data);
+	if(compcur == 0)
 	{
 		list->head = list->head->next;
 		SLDestroyIterator(ptr);
+		return 1;
 	}
 
-	//get next item pointed to by iterator
-	element = SLNextItem(ptr);
+	cur = ptr->current->next;
+	prev = ptr->current;
 
-	//loop through linked list, checking if equal
-	while(ptr->current != NULL)
+	while(ptr->current != NULL && prev != NULL)
 	{
-		int comp2 = (*list->compareF)(newObj,element);
-		if(comp2 == 0)
+		compcur = list->compareF(newObj, cur->data);
+		if(compcur == 0)
 		{
-			previous->next = ptr->current->next;
-			SLDestroyIterator(ptr);
+			listItem* temp = cur;
+			prev->next = cur->next;
+			free(temp);
 			return 1;
-			
 		}
 
-		previous = ptr->current;
-		element = SLNextItem(ptr);
+		prev = cur;
+		cur = cur->next;
+
 
 	}
 
+	printf("we should not have gotten here");
 	return 0;
 
 
