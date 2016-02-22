@@ -126,6 +126,7 @@ int SLInsert(SortedListPtr list, void *newObj)
 			list->head = temp;
 			iPtr->current =  list->head;
 			iPtr->current->next = swap;
+			//swap->viewers++;
 
 			return 1;
 
@@ -151,14 +152,13 @@ int SLRemove(SortedListPtr list, void *newObj)
 
 	//checking at head
 	int compcur = list->compareF(newObj,ptr->current->data);
+	printf("value of newobj: %d\n", *((int*)newObj));
+	printf("this is the value of compcur rn: %d\n", compcur);
 	if(compcur == 0)
 	{
-		list->head = list->head->next;
-		if(ptr->current->viewers == 1)
-		{
-			freeItem(ptr->current);
-		}
-		SLDestroyIterator(ptr);
+		listItem* temp = ptr->current->next;
+		ptr->current = temp->next;
+		free(temp);
 		return 1;
 	}
 
@@ -167,14 +167,9 @@ int SLRemove(SortedListPtr list, void *newObj)
 
 	while(ptr->current != NULL && prev != NULL)
 	{
-		//using NextItem to increment when we go through the list
-		compcur = list->compareF(newObj, SLNextItem(ptr));
+		compcur = list->compareF(newObj, cur->data);
 		if(compcur == 0)
 		{
-			if(ptr->current->viewers == 1)
-			{
-				freeItem(ptr->current);
-			}
 			listItem* temp = cur;
 			prev->next = cur->next;
 			free(temp);
@@ -198,20 +193,9 @@ int SLRemove(SortedListPtr list, void *newObj)
 
 void *SLNextItem(SortedListIteratorPtr iter)
 {
-	listItem* cur = iter->current;
-	listItem* next = iter->current->next;
-
-	if(cur->viewers == 0)
-	{
-		freeItem(cur);
-	}
-	else
-	{
-		cur->viewers--;
-	}
-
-	iter->current = next;
-	if(next == NULL)
+	listItem* temp = iter->current->next;
+	iter->current = temp;
+	if(iter->current == NULL)
 	{
 		return NULL;
 	}
