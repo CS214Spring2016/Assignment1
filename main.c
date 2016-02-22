@@ -133,26 +133,26 @@ int main(int argc, char **argv)
 	}
 
 
-	//test NameTag Struct
+	// //test NameTag Struct
 
-	char* nombre = "Michael";
-	char* pat = "Pat Barrett";
-	NameTag *michael = createNT(nombre, 94);
-	NameTag *michaelclone = createNT(nombre, 19);
-	NameTag *patb = createNT(pat, 10);
-	SortedListPtr namelist = SLCreate(compareNameTag, destroyNT);
-	SortedListIteratorPtr nameIT;
+	// char* nombre = "Michael";
+	// char* pat = "Pat Barrett";
+	// NameTag *michael = createNT(nombre, 94);
+	// NameTag *michaelclone = createNT(nombre, 19);
+	// NameTag *patb = createNT(pat, 10);
+	// SortedListPtr namelist = SLCreate(compareNameTag, destroyNT);
+	// SortedListIteratorPtr nameIT;
 
-	printf("%s %d\n",michael->name,SLInsert(namelist, (void*)michael));
-	printf("%s %d\n",michaelclone->name,SLInsert(namelist, (void*)michaelclone));
-	printf("%s %d\n",patb->name,SLInsert(namelist, (void*)patb));
+	// printf("%s %d\n",michael->name,SLInsert(namelist, (void*)michael));
+	// printf("%s %d\n",michaelclone->name,SLInsert(namelist, (void*)michaelclone));
+	// printf("%s %d\n",patb->name,SLInsert(namelist, (void*)patb));
 
-	nameIT = SLCreateIterator(namelist);
-	NameTag* currname = (NameTag *)SLNextItem(nameIT);
-	while( currname != NULL){
-			printf("Current list item: %s %d\n",currname->name, currname->id);
-			currname = (NameTag*)SLNextItem(nameIT);
-	}
+	// nameIT = SLCreateIterator(namelist);
+	// NameTag* currname = (NameTag *)SLNextItem(nameIT);
+	// while( currname != NULL){
+	// 		printf("Current list item: %s %d\n",currname->name, currname->id);
+	// 		currname = (NameTag*)SLNextItem(nameIT);
+	// }
 
 	return 0;
 }
