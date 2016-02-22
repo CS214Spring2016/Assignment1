@@ -203,51 +203,27 @@ int SLRemove(SortedListPtr list, void *newObj)
 }
 
 void *SLNextItem(SortedListIteratorPtr iter)
-{
-<<<<<<< HEAD
-	//have to declare this now or get weird memory values
-	listItem* next = iter->current->next;
+{	
+	listItem* temp = iter->current->next;
 
 	if(iter->current->viewers == 0)
 	{
-		//this means we've seen it before, delete it
 		freeItem(iter->current);
 	}
 	else
 	{
-		//otherwise just increment pointer
 		iter->current->viewers--;
 	}
 
-	//increment pointer
-	iter->current = next;
-	if(next == NULL)
-=======
-	listItem* temp = iter->current->next;
+	iter->current = temp;
 	if(temp == NULL)
 	{
 		return NULL;
 	}
 	else
 	{
-		iter->current->viewers--;
-	}
-	iter->current = temp;
-	if(iter->current == NULL)
->>>>>>> parent of 0ee91d0... works with adding  too
-	{
-		return NULL;
-	}
-	else
-	{
-<<<<<<< HEAD
-		//increment counter
-		next->viewers++;
-		return next->data;
-=======
 		iter->current->viewers++;
 		return iter->current->data;
->>>>>>> parent of 0ee91d0... works with adding  too
 	}
 }
 void * SLGetItem( SortedListIteratorPtr iter ){
