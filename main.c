@@ -126,17 +126,6 @@ int main(int argc, char **argv)
 
 	testPtr = SLCreateIterator(list);
 
-<<<<<<< HEAD
-	// printf("Add something after making the iterator");
-	// printf("%d %d\n",g,SLInsert(list, (void*)&g));
-
-
-	printf("remove item\n");
-	SLRemove(list, ((void*)&d));
-=======
-	//printf("item just removed");
-	//SLRemove(list, ((void*)&d));
->>>>>>> parent of 0ee91d0... works with adding  too
 
 	int* currlist = (int *)SLGetItem(testPtr);
 	while( currlist != NULL){

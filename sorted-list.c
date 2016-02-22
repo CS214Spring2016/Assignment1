@@ -174,11 +174,6 @@ int SLRemove(SortedListPtr list, void *newObj)
 
 	while(ptr->current != NULL && prev != NULL)
 	{
-<<<<<<< HEAD
-		//using NextItem to increment when we go through the list
-		//its all symbiosis-ey and stuff
-=======
->>>>>>> parent of 0ee91d0... works with adding  too
 		compcur = list->compareF(newObj, cur->data);
 		if(compcur == 0)
 		{
