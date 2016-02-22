@@ -124,16 +124,15 @@ int main(int argc, char **argv)
 	printf("%d %d\n",e,SLInsert(list, (void*)&e));
 	printf("%d %d\n",d,SLInsert(list, (void*)&d));
 	printf("%d %d\n",f,SLInsert(list, (void*)&f));
-	//printf("%d %d\n",g,SLInsert(list, (void*)&g));
-
-
-
-	testPtr = SLCreateIterator(list);
 	printf("%d %d\n",g,SLInsert(list, (void*)&g));
 
-	// SLRemove(list, ((void*)&e));
-	// printf("item just removed!\n");
+	testPtr = SLCreateIterator(list);
 
+	printf("%d %d\n",g,SLInsert(list, (void*)&g));
+
+
+	//printf("item just removed");
+	//SLRemove(list, ((void*)&d));
 
 	int* currlist = (int *)SLGetItem(testPtr);
 	while( currlist != NULL){
@@ -142,7 +141,8 @@ int main(int argc, char **argv)
 	}
 
 
-
+	// SLRemove(list, ((void*)&e));
+	// printf("item just removed!\n");
 
 
 	// //we just removed something, this is an attempt to print with same iterator

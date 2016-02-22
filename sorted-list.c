@@ -56,12 +56,6 @@ SortedListIteratorPtr SLCreateIterator(SortedListPtr list)
 	else
 	{
 		sPtr->current = list->head;
-
-		//this stops segfaults when removing and getting next
-		if(sPtr->current != NULL)
-		{
-			list->head->viewers++;
-		}
 		return sPtr;
 	}
 }
@@ -171,10 +165,10 @@ int SLRemove(SortedListPtr list, void *newObj)
 	cur = ptr->current->next;
 	prev = ptr->current;
 
-
 	while(ptr->current != NULL && prev != NULL)
 	{
-		compcur = list->compareF(newObj, cur->data);
+		//using NextItem to increment when we go through the list
+		compcur = list->compareF(newObj, SLNextItem(ptr));
 		if(compcur == 0)
 		{
 			if(ptr->current->viewers == 1)
@@ -203,16 +197,17 @@ int SLRemove(SortedListPtr list, void *newObj)
 }
 
 void *SLNextItem(SortedListIteratorPtr iter)
-{	
-	listItem* temp = iter->current->next;
+{
+	listItem* cur = iter->current;
+	listItem* next = iter->current->next;
 
-	if(iter->current->viewers == 0)
+	if(cur->viewers == 0)
 	{
-		freeItem(iter->current);
+		freeItem(cur);
 	}
 	else
 	{
-		iter->current->viewers--;
+		cur->viewers--;
 	}
 
 	iter->current = temp;
@@ -222,8 +217,8 @@ void *SLNextItem(SortedListIteratorPtr iter)
 	}
 	else
 	{
-		iter->current->viewers++;
-		return iter->current->data;
+		temp->viewers++;
+		return temp->data;
 	}
 }
 void * SLGetItem( SortedListIteratorPtr iter ){
