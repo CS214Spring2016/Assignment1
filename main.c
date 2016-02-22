@@ -128,11 +128,12 @@ int main(int argc, char **argv)
 
 	testPtr = SLCreateIterator(list);
 
-	printf("%d %d\n",g,SLInsert(list, (void*)&g));
+	// printf("Add something after making the iterator");
+	// printf("%d %d\n",g,SLInsert(list, (void*)&g));
 
 
-	//printf("item just removed");
-	//SLRemove(list, ((void*)&d));
+	printf("remove item\n");
+	SLRemove(list, ((void*)&d));
 
 	int* currlist = (int *)SLGetItem(testPtr);
 	while( currlist != NULL){
