@@ -107,7 +107,7 @@ void destroyFunction(void *v)
 int main(int argc, char **argv)
 {
 	SortedListPtr list = SLCreate(compareInteger, destroyFunction);
-	SortedListIteratorPtr testPtr, test;
+	SortedListIteratorPtr testPtr;
 
 	int a = 1;
 	int b = 2;
@@ -126,22 +126,27 @@ int main(int argc, char **argv)
 
 	testPtr = SLCreateIterator(list);
 
-	int* currlist = (int *)SLNextItem(testPtr);
+	//printf("item just removed");
+	//SLRemove(list, ((void*)&d));
+
+	int* currlist = (int *)SLGetItem(testPtr);
 	while( currlist != NULL){
 		printf("Current list item: %d\n",*currlist);
 		currlist = (int*)SLNextItem(testPtr);
 	}
 
-	SLRemove(list, ((void*)&f));
 
-	test = SLCreateIterator(list);
+	// SLRemove(list, ((void*)&e));
+	// printf("item just removed!\n");
 
-	int* curr = (int *)SLNextItem(test);
-	while(curr != NULL)
-	{
-		printf("current item: %d\n", *curr);
-		curr = (int *)SLNextItem(test);
-	}
+
+	// //we just removed something, this is an attempt to print with same iterator
+	// int* curr = (int *)SLNextItem(testPtr);
+	// while(curr != NULL)
+	// {
+	// 	printf("current item: %d\n", *curr);
+	// 	curr = (int *)SLNextItem(testPtr);
+	// }
 
 
 
@@ -168,7 +173,7 @@ int main(int argc, char **argv)
 	// 		currname = (NameTag*)SLNextItem(nameIT);
 	// }
 
-	return 0;
+	// return 0;
 }
 
 

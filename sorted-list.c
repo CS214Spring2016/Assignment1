@@ -154,6 +154,10 @@ int SLRemove(SortedListPtr list, void *newObj)
 	if(compcur == 0)
 	{
 		list->head = list->head->next;
+		if(ptr->current->viewers == 1)
+		{
+			freeItem(ptr->current);
+		}
 		SLDestroyIterator(ptr);
 		return 1;
 	}
@@ -166,6 +170,10 @@ int SLRemove(SortedListPtr list, void *newObj)
 		compcur = list->compareF(newObj, cur->data);
 		if(compcur == 0)
 		{
+			if(ptr->current->viewers == 1)
+			{
+				freeItem(ptr->current);
+			}
 			listItem* temp = cur;
 			prev->next = cur->next;
 			free(temp);
@@ -189,12 +197,25 @@ int SLRemove(SortedListPtr list, void *newObj)
 
 void *SLNextItem(SortedListIteratorPtr iter)
 {
-	listItem* temp = iter->current;
+	listItem* temp = iter->current->next;
 	if(temp == NULL)
+	{
 		return NULL;
-	iter->current->viewers++;
-	iter->current=iter->current->next;
-	return temp->data;
+	}
+	else
+	{
+		iter->current->viewers--;
+	}
+	iter->current = temp;
+	if(iter->current == NULL)
+	{
+		return NULL;
+	}
+	else
+	{
+		iter->current->viewers++;
+		return iter->current->data;
+	}
 }
 void * SLGetItem( SortedListIteratorPtr iter ){
 	listItem* temp = iter->current;
