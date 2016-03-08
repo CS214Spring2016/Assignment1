@@ -13,7 +13,7 @@ sl: main.o libsl.a
 	$(COMPILER) $(CCFLAGS) -o sl main.o libsl.a
 
 transfer:
-	cp sorted-list.h sorted-list.c main.c makefile testplan.txt asst1
+	cp sorted-list.h sorted-list.c main.c makefile testplan.txt readme.pdf asst1
 	tar cfz Asst1.tgz asst1
 	scp Asst1.tgz kpb81@java.cs.rutgers.edu:~/CS214
 
